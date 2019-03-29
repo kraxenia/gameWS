@@ -2,14 +2,18 @@ const express = require('express')
 const wss = require('ws');
 const uuid = require('uuid');
 const PORT = process.env.PORT || 8080;
+
 const server = express()
   .use((req, res) => res.sendFile(INDEX) )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 //initialize the WebSocket server instance
-const ws = new wss.Server({ server });
+//const ws = new wss.Server({ server });
 let CLIENTS={};
-const webSocket = new wss.Server({ port:  8080 });
+//const webSocket = new wss.Server({ port:  8080 });
+
+const webSocket = new wss.Server({ server });
+
 
 webSocket.on('connection', function connection(ws) {
   ws.id = uuid.v4();
