@@ -1,11 +1,10 @@
 const express = require('express')
-const app = express()
-const http = require("http");
 const wss = require('ws');
 const uuid = require('uuid');
-const path = require('path');
-
-const server = http.createServer(app);
+const PORT = process.env.PORT || 8080;
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 //initialize the WebSocket server instance
 const ws = new wss.Server({ server });
